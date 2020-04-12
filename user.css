@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css?family=Exo:400,700&display=swap');
+body {
+
+  margin: 0;
+  padding:0;
+  font-family: 'Exo', sans-serif6;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  animation: animatebg 16s ease-in-out infinite;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  overflow: hidden;
+  }
+
+
+.outer{
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  overflow: auto;
+}
+
+.container {
+  padding: 56px;
+}
+
+  h1 {
+      color: red;
+      filter: drop-shadow(2px 2px 5px #990073);
+    }
+
+  h3{
+    color: white;
+    filter: drop-shadow(0px 0px 5px white);
+
+  }
+
+  #left{
+  
+  text-align: center;
+  width:30%;
+  display:inline-block;
+}
+#right{
+  margin-top: 3%;
+   filter: drop-shadow(0px 0px 5px red);
+  float: right;
+  padding-top: 0%;
+  width:10%;
+}
+.button {
+    
+    border: none;
+    color: white;
+    
+    /*padding: 16px 32px;*/
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 23px;
+    margin-top: 7%;   
+    margin-left: 50%;
+    transform: translateX(-50%);
+    transition-duration: 0.7s;
+    cursor: pointer;
+   
+     
+  }
+
+.button2 {
+
+     margin-top: 10%;
+     border-radius: 10px;
+    background-color: transparent;
+    color: red; 
+    border: 5px solid red;
+    width: 200px;
+    height: 70px;
+    filter: drop-shadow(0px 0px 15px #b300b3);
+  }
+
+.button2:hover {
+
+    color: white;
+    border-radius: 20px;
+    border: 5px solid red;
+    background-color: red;
+    filter: drop-shadow(0px 0px 25px #e60000);
+
+  }
+
+.center {
+    width: 80%;
+    padding: 20px;
+    }
+
+
+
+@keyframes animatebg{
+  0%,100%{
+    background-image: url('res/bg/bg (1).jpg');
+  }
+  25%{
+    background-image: url('res/bg/bg (1).png');
+  }
+  50%{
+    background-image: url('res/bg/bg (2).png');
+  }
+  75%{
+    background-image: url('res/bg/bg (4).jpg');
+  }
+}
