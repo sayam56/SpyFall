@@ -17,9 +17,6 @@
 </head>
 
 <body> 
-	<!-- git commit test -->
-<h1>show git</h1>
-	<!-- ends ehere -->
 
 		<div class="container">
 			
