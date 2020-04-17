@@ -95,19 +95,36 @@ span.psw {
 
 
 .animate {
-  -webkit-animation: animatezoom 0.6s;
-  animation: animatezoom 0.6s
+  -webkit-animation: animatezoomIN 0.6s;
+  animation: animatezoomIN 0.6s
 }
 
-@-webkit-keyframes animatezoom {
+.animateClose {
+  -webkit-animation: animatezoomOUT 0.6s;
+  animation: animatezoomOUT 0.6s
+}
+
+
+@-webkit-keyframes animatezoomIN {
   from {-webkit-transform: scale(0)} 
   to {-webkit-transform: scale(1)}
 }
   
-@keyframes animatezoom {
+@keyframes animatezoomIN {
   from {transform: scale(0)} 
   to {transform: scale(1)}
 }
+
+@-webkit-keyframes animatezoomOUt {
+  from {-webkit-transform: scale(1)} 
+  to {-webkit-transform: scale(0)}
+}
+  
+@keyframes animatezoomOUT {
+  from {transform: scale(1)} 
+  to {transform: scale(0)}
+}
+
 
 
 

@@ -21,7 +21,7 @@
 
     <div class="outer">
 
-      <span id="form">
+    <span id="form">
         
     <h1>Sign Up</h1>
 
