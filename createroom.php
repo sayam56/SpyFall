@@ -56,12 +56,12 @@ catch(PDOException $e){
 
                     try{
                         $insert->execute();     
-                         ?>
+                       /*  ?>
                                 <script>
                                   window.alert("Created Successfully");
                                   window.location.assign("waitingroom.php");
                                 </script>
-                        <?php
+                        <?php*/
                         }/*inner try*/
                     catch(PDOException $ex){
                             ?>

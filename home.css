@@ -4,7 +4,7 @@
 body{
   margin: 0;
   padding:0;
-  font-family: 'Exo', sans-serif6
+  font-family: 'Exo', sans-serif6;
   position: absolute;
   left: 0;
   top: 0;
@@ -69,6 +69,7 @@ hr {
 
 .button2 {
 	  background-color: transparent;
+	  border-radius: 10px;
 	  color: red; 
 	  border: 5px solid red;
 	  width: 200px;
@@ -79,6 +80,7 @@ hr {
 	  color: white;
 	  border: 5px solid red;
 	  background-color: red;
+	  border-radius: 30px;
 	  filter: drop-shadow(0px 0px 25px red);
 
 	}
