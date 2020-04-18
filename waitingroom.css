@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css?family=Exo:400,700&display=swap');
+
+
+body{
+  margin: 0;
+  padding:0;
+  font-family: 'Exo', sans-serif6;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  animation: animatebg 16s ease-in-out infinite;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  overflow: hidden;
+}
+
+.container { 
+/*   position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100px;
+  height: 100px;*/
+  
+}
+
+.outer{
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  overflow: auto;
+}
+
+
+  h3{
+    padding-top: 5%;
+    text-align: center;
+    color: #e600e6;
+    filter: drop-shadow(0px 0px 5px #ff80b3);
+
+  }
+
+  #left{
+  
+  text-align: center;
+  width:30%;
+  display:inline-block;
+}
+#right{
+  margin-top: 3%;
+  
+  float: right;
+  padding-top: 0%;
+  margin: 1%;
+
+}
+
+.button {
+    
+    border: none;
+    color: white;
+    /*padding: 16px 32px;*/
+  /*  position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: 0 0 0 -5%;*/
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 19px;
+    margin-top: 25%;   
+    margin-left: 50%;
+    transform: translateX(-50%);
+
+    transition-duration: 0.7s;
+    cursor: pointer;
+   
+     
+  }
+
+.button2 {
+    background-color: transparent;
+    border-radius: 10px;
+    color: red; 
+    border: 5px solid red;
+    width: 200px;
+    height: 70px;
+     filter: drop-shadow(5px 0px 25px black);
+  }
+
+.button2:hover {
+    color: white;
+    border: 5px solid red;
+    background-color: red;
+    border-radius: 30px;
+    filter: drop-shadow(0px 0px 25px red);
+
+  }
+
+
+.center {
+/* display: inline-block;
+ text-align: center;
+ margin-left: 50%;
+ margin-top: 50%;*/
+ /*display: flex;
+ justify-content: center;*/
+    }
+
+
+
+
+  @keyframes animatebg{
+  0%,100%{
+    background-image: url('res/bg/bg (1).jpg');
+  }
+  25%{
+    background-image: url('res/bg/bg (1).png');
+  }
+  50%{
+    background-image: url('res/bg/bg (2).png');
+  }
+/*  60%{
+    background-image: url('res/bg/bg (3).jpg');
+  }*/
+  75%{
+    background-image: url('res/bg/bg (4).jpg');
+  }
+}
+
+
+
+@media (max-width: 992px) {
+
+  }
+@media (max-width: 768px) {
+  
+}
+@media (max-width: 576px) {
+  
+}
