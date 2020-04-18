@@ -3,6 +3,7 @@ session_start();
 $fname= $_SESSION["fname"];
 $lname =$_SESSION["lname"];
 $email = $_SESSION["email"];
+$uid = $_SESSION["uid"];
 
  if(isset($_SESSION['fname'])) {
  	echo "<script>console.log('inside if and it works');</script>";	
@@ -60,6 +61,7 @@ $email = $_SESSION["email"];
         
   			<h3> <?php echo "$fname "."$lname" ; ?> </h3>
   			<h3>Your Email Is : <?php echo "$email" ; ?> </h3>
+  			<h3>Your UID is: <?php echo "$uid" ; ?> </h3>
 
 
     		
@@ -130,7 +132,7 @@ $email = $_SESSION["email"];
                         <td width="25%"><?php echo $val[2] ?></td>
                         <td width="25%"><?php echo $val[4] ?></td>
                         <td width="25%">
-                          <input type="button" name="select" value="SELECT" class="btn btn-outline-light btg-lg" onclick="add here">
+                          <input type="button" name="select" value="SELECT" class="btn btn-outline-light btg-lg" onclick="showRoomG(<?php echo $val[0]?>);"> <!-- room id ta send kora hocche and since users clicks this only if the user is a guest so user id ta guest hishebe send hbe -->
                         </td>
                       </tr>
                       <?php
@@ -173,7 +175,7 @@ $email = $_SESSION["email"];
         <div class="modal-body">
           
         	<!-- form here -->
-        	<form action="createroom.php" method="post"> 
+        	<form action="waitingroom.php" method="post"> 
     
 		      <label for="rname"><b>Room Name</b></label>
 		      <input type="text" placeholder="Enter room name" name="rname" required>
@@ -189,6 +191,8 @@ $email = $_SESSION["email"];
 		                <br>
 		                <?php
 		                  $_SESSION["uemail"] = $email;
+		                  $_SESSION["huid"] = $uid;
+		                  /*room create kore waitingroom e gele user host.*/
 		                ?>
 		                
 
@@ -215,11 +219,11 @@ $email = $_SESSION["email"];
 
 </div> <!-- container -->
 
-
+<<?php $_SESSION["fname"] = $fname; ?>
 
 
 <script>
-
+var uid= "<?php echo $uid ?>";
 
 function showTable(){
 
@@ -230,6 +234,17 @@ function showTable(){
         document.getElementById('roomTableShow').style.display = 'none';
       }
     }/*showTable ends*/
+
+
+
+    function showRoomG(id){
+    	var roomId=id;
+
+    	/*ekhane khali variable er value gula send hobe to the next page and oi page er moddhe ajax diye dynamically modal er moddhe new members add hbe*/
+
+
+		location.assign('waitingroom.php?roomID='+roomId+'&gst='+uid);
+    }/*showRoomG*/
 
 </script>
 

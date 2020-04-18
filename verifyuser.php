@@ -40,6 +40,8 @@ try{
 						$_SESSION["email"]= $email;
 						$_SESSION["fname"]=$key[1];
 						$_SESSION["lname"]=$key[2];
+						$_SESSION["uid"]=$key[0];
+						/*send the user id as well*/
                     	header('Location: userprofile.php');
                     	break;
                     }

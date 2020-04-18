@@ -39,14 +39,17 @@ body{
   overflow: auto;
 }
 
+  h1 {
+      color: red;
+      filter: drop-shadow(2px 2px 5px #990073);
+    }
 
   h3{
-    padding-top: 5%;
-    text-align: center;
-    color: #e600e6;
-    filter: drop-shadow(0px 0px 5px #ff80b3);
+    color: white;
+    filter: drop-shadow(0px 0px 5px white);
 
   }
+
 
   #left{
   
