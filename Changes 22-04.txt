@@ -1,0 +1,2 @@
+Admin and CSS page - Location and Roles, Viewing locations
+Verification of admin
