@@ -120,7 +120,6 @@ body{
 
 
 
-
   @keyframes animatebg{
   0%,100%{
     background-image: url('res/bg/bg (1).jpg');
@@ -141,10 +140,12 @@ body{
 
 
 
-@media (max-width: 992px) {
 
+@media (max-width: 992px) {
+          
   }
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
+
   
 }
 @media (max-width: 576px) {
