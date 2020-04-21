@@ -9,7 +9,7 @@
   <title>SpyFall LOGIN</title>
   <link rel="stylesheet" href="bootstrap-4.3.1-dist/css/bootstrap.min.css">
 
-<!--   <link href="login.css" rel="stylesheet"> -->
+  <link href="login.css" rel="stylesheet"> 
   <link rel="icon" href="res/logo.ico">
  
   <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
