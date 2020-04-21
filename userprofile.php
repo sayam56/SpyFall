@@ -3,6 +3,7 @@ session_start();
 $fname= $_SESSION["fname"];
 $lname =$_SESSION["lname"];
 $email = $_SESSION["email"];
+$uid = $_SESSION["uid"];
 
  if(isset($_SESSION['fname'])) {
  	echo "<script>console.log('inside if and it works');</script>";	
@@ -24,24 +25,6 @@ $email = $_SESSION["email"];
             catch(PDOException $e){
                 echo "<script>window.alert('connection error');</script>";
             }
-
-
-		try{
-
-                    $id="select u_id from users where u_email='$email' ";
-                    $object = $conn->query($id);
-                    $table = $object->fetchAll();
-
-                    foreach ($table as $key ) {
-                    	$uid = $key[0];
-                        break;
-                                
-                            } 
-
-                    }/*outer try block ends here*/
-                    catch(PDOException $e){
-                                        echo "<script>console.log('uid fetch error');</script>";
-                                    }/*outer catch ends here*/
 
 ?>
 

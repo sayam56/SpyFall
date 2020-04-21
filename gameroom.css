@@ -1,5 +1,3 @@
-
-  
 @import url('https://fonts.googleapis.com/css?family=Exo:400,700&display=swap');
 
 
@@ -32,34 +30,6 @@ hr {
   background: rgba(0,0,0,0.6);
   overflow: auto;
 }
-
-h1 {
-      color: red;
-      filter: drop-shadow(2px 2px 5px #990073);
-    }
-
-  h3{
-    color: white;
-    filter: drop-shadow(0px 0px 5px white);
-
-  }
-
-
-  #left{
-  
-  text-align: center;
-  width:30%;
-  display:inline-block;
-}
-#right{
-  margin-top: 3%;
-  
-  float: right;
-  padding-top: 0%;
-  margin: 1%;
-
-}
-
 .button {
     
     border: none;

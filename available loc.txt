@@ -1,0 +1,48 @@
+ <!-- locartion table -->
+
+		              <table class="table table-hover animate" style="width: 75%; margin: auto;	">
+		                <thead class="thead-dark" style="color: white; text-align: center;">
+
+		                  <tr>
+		                    <th>LIST OF LOCATIONS</th>
+		                    
+		                  </tr>
+		                  
+		                </thead>
+		            </table>
+		            <div class="scrollTable">
+		            <table class="table animate" style="width: 75%; margin: auto; text-align: center;">
+            	
+                	<tbody class="table" style="color: white;">
+					<?php
+
+					try{
+
+                    $lnameqry="SELECT l_name FROM `locations`";
+                    $lobj = $conn->query($lnameqry);
+                    $loctab = $lobj->fetchAll();
+
+                    foreach ($loctab as $k ) {                             
+                             ?> 
+                             <tr style="/*border:2px solid white;*/ overflow: hidden;" id="tablerow">
+									
+									<td><?php echo $k[0] ?></td>
+									
+								</tr>
+                             <?php      
+                            } 
+                    }/* try block ends here*/
+                    catch(PDOException $e){
+                                        echo "<script>console.log('guest room fetch error');</script>";
+                                    }/*catch ends here*/
+
+
+
+            ?> 
+
+            </tbody>
+              
+
+              </table>
+              </div><!-- scrollTable -->
+ 

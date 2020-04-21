@@ -11,6 +11,8 @@
 
 	<link href="home.css" rel="stylesheet">
 	<link href="howtoplay.css" rel="stylesheet">
+
+
 	<link rel="icon" href="res/logo.ico">
 	
 	
@@ -43,6 +45,7 @@
 
   <!-- Modal content -->
   <div class="modal-content">
+  	<div id="animation" >
     <div class="modal-header">
       <span class="close">&times;</span>
       
@@ -61,7 +64,9 @@
       <p><strong>Enjoy</strong></p>
     </div>
     <div class="modal-footer">
-      
+
+    	
+       </div><!-- animation -->
     </div>
   </div>
 
@@ -85,6 +90,7 @@ btn.onclick = function() {
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
   modal.style.display = "none";
+  
 }
 
 // When the user clicks anywhere outside of the modal, close it

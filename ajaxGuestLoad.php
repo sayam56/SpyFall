@@ -1,7 +1,6 @@
 <?php
 	 echo "<script>console.log('next page SUCCESSFULL!!!!');</script>";
 	 $count = 1;
-
 	try{
 	    $conn=new PDO("mysql:host=localhost;dbname=spyfalldb;",'root','');
 	    echo "<script>console.log('connection successful');</script>";
@@ -40,51 +39,35 @@
                 	$gsql = "SELECT guest_uid FROM hostjguest WHERE r_id='".$r_id."' GROUP BY guest_uid" ;
  					$gobj = $conn->query($gsql);
  					$tab = $gobj->fetchAll();
- 					$gcount = $gobj->rowCount();
- 					echo $gcount." joined out of 5";
+
  					foreach ($tab as $val) { /*val has the guest UIDs we need to search for*/
 
  						try{
 
-
  							$selectsql=" SELECT * from users WHERE u_id='".$val[0]."' ";
 							$obj = $conn->query($selectsql);
-							
+
 							if ($obj->rowCount() == 0) {
 							?>
-							
 								<tr>
 									<td colspan="2" style="text-align: center;">NO GUESTS JOINED YET!</td>
 								</tr>
-
 							<?php
-
 							}else{
-								
 								$table = $obj->fetchAll();
 								foreach ($table as $key) {
 							?>
-
-							
-
-								<tr style="border:2px solid black; overflow: hidden;" id="tablerow">
+								<tr style="border:2px solid black; overflow: auto;" id="tablerow">
 									<td><?php echo $count ?></td>
 									<td><?php echo "".$key[1]." ".$key[2]."" ?></td>
 									
 								</tr>
 
-							
 							<?php
-
 							$count++;
 						}
-
-						 if ($gcount >= 1) {
-						 	echo $gcount."inside if";
-						 	header("Location: redirect.php");
-							
 					}
-}
+
 
  						}/*inner try*/
  						catch(PDOException $e){

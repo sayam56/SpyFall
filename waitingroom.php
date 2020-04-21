@@ -10,8 +10,6 @@ $status = "";
 $host="";
 $roomID = "";
 $guid = "";
-$roomName="";
-$randomLocation="";
 
  if(isset($_SESSION['fname'])) {
   echo "<script>console.log('inside if and it works');</script>"; 
@@ -49,7 +47,7 @@ catch(PDOException $e){
             
             $returnvalue=$conn->query($checkquery);
 
-            /*room checking er kaj ta ekhane kroa jaito :3 2nd time ar query lagto nah. but owh well... */
+            /*room checking er kaj ta ekhane kora jaito :3 2nd time ar query lagto nah. but owh well... */
 
             $rowcount=$returnvalue->rowCount();
             if($rowcount>0)
@@ -79,8 +77,12 @@ catch(PDOException $e){
 
                     try{
                         $insert->execute();     
-                       
-
+                       /*  ?>
+                                <script>
+                                  window.alert("Created Successfully");
+                                  window.location.assign("waitingroom.php");
+                                </script>
+                        <?php*/
                         }/*inner try*/
                     catch(PDOException $ex){
                             ?>
@@ -132,9 +134,10 @@ catch(PDOException $e){
             $guid = $_GET["gst"];
 
            ?>
-            <h1> WELCOME GUEST!! TO THE WAITING LOBBY </h1>
+            <h1> WELCOME GUEST!! TO THE GAME ROOM  </h1>
             <h3>Your UID is: <?php echo "$guid" ; ?> </h3>
             <h3>THIS IS ROOM NUMBER: <?php echo "$roomID" ; ?> </h3>
+
 
           <?php
 
@@ -149,7 +152,6 @@ catch(PDOException $e){
                     foreach ($tabb as $kk ) {
                               $status = $kk[4];
                               $host = $kk[1];
-                              $roomName = $kk[2];
                               break;         
                             } 
                     }/* try block ends here*/
@@ -169,8 +171,7 @@ catch(PDOException $e){
         else /*ekhane host hishebe dhukeche*/
         {
            ?>
-
-            <h1> WELCOME HOST!! TO THE WAITING LOBBY</h1>
+            <h1> WELCOME HOST!! TO THE GAME ROOM</h1>
             <h3>Your UID is: <?php echo "$huid" ; ?> </h3>
 
             <!-- here roomID is unknown but is needed...   -->
@@ -187,54 +188,8 @@ catch(PDOException $e){
                               $roomID = $k[0];
                               $status = $k[4];
                               $host = $k[1];
-                              $roomName = $k[2];
                               break;         
                             } 
-
-
-                            ?> 
-
-       <!-- ...................................................................................................... -->
-
-
-           <!-- randomly choose a location now -->
-
-            <div id="location">
-              <?php
-
-               try{
-
-                      $maxID="SELECT MAX(l_id) FROM `locations` ";
-                      $maxObj = $conn->query($maxID);
-                      $maxTab = $maxObj->fetchAll();
-
-                      foreach ($maxTab as $maxVal ) {                             
-                                
-                          $randomLocation = rand(1,$maxVal[0]);
-                          $insert = $conn->prepare("INSERT INTO locationjroom(`r_id`, `l_id`) values('$roomID','$randomLocation')");
-                          $insert->execute();
-
-                        break;
-
-                              } 
-                      }/* OUTER try block ends here*/
-                      catch(PDOException $e){
-                                          echo "<script>console.log('max location id fetch error');</script>";
-                                      }/*OUTER catch ends here*/
-
-              ?>
-
-            </div><!-- location ends -->
-
-
-
-        <!-- ...................................................................................................... -->
-
-
-
-                            <?php
-
-
                     }/* try block ends here*/
                     catch(PDOException $e){
                                         echo "<script>console.log('r_id fetch error');</script>";
@@ -246,23 +201,28 @@ catch(PDOException $e){
           <?php
         } /*else ends here*/
 
-  
+        
+          if (strcmp($status, "active") === 0  ) { /*&& isset($_GET["gst"]) look into it laterzz*/
           ?>
-
-
           <script type="text/javascript"> 
 
                $(document).ready(function(){
                 $("#waitingRoomModal").modal('show');
                 refreshAjax(<?php echo $guid; ?>);
-             });
+    });
 
         </script>
+          
+          <?php
+        }
+        
+
+        ?>
 
 
-        <h3>Your ROOMNAME IS : <?php echo "$roomName" ; ?> </h3>
+
+      
         <h3>Your Email Is : <?php echo "$email" ; ?> </h3>
-        <h3>THIS ROOM IS CURRENTLY : <?php echo "$status" ; ?> </h3>
 
 
         
@@ -276,9 +236,9 @@ catch(PDOException $e){
     </span>
 
 
-<!-- 
-	<button class="button button2" data-toggle="modal" data-target="#waitingRoomModal" onclick="refreshAjax(<?php /*echo */$guid; ?>);" style="vertical-align: middle;" >START</button>
-	 -->
+
+	<button class="button button2" data-toggle="modal" data-target="#waitingRoomModal" onclick="refreshAjax(<?php echo $guid; ?>);" style="vertical-align: middle;" >START</button>
+	
 
 
 
@@ -291,7 +251,7 @@ catch(PDOException $e){
 
 
 <!-- Waiting Modal -->
-<div class="modal fade" data-backdrop="static" id="waitingRoomModal" role="dialog">
+<div class="modal fade" id="waitingRoomModal" role="dialog">
     <div class="modal-dialog">
     
       <!-- contents-->
@@ -346,49 +306,37 @@ catch(PDOException $e){
 
             <!-- in terms of assigning roles we'll treat host as a guest and copy that over to assign table -->
 
-            <div >
-
-            <?php 
-                
-               
-
-             ?>
-              <div class="table-responsive">
-                 <table class="col-12" width="70%">
-                   <thead>
-                          <tr>
-                            <th>Number</th>
-                            <th>Guest Name</th>
-                          </tr>
-                    </thead>
-                    <tbody id="tableSection" >
-
-
-                    </tbody>
-
-                   </table>
-              </div><!-- table  responsive ends -->
+            <div id="GuestTable">
               
-                
+              <div class="table-responsive">
+              <table class="col-12" width="100%">
+                <thead>
+                  <tr>
+                    <th>Number</th>
+                    <th>Guest Name</th>
+                  </tr>
+                </thead>
 
-            </div><!-- tablesection ends here -->
+                <tbody id="tableSection">
+                  <!-- loaded by ajax -->
+                </tbody>
+              </table>
+            </div><!-- exercise table ends -->
+
+            </div><!-- guest table ends here -->
 
 
            
   
-          <!-- <button type="button" class="button button2" >PLAY</button> -->
+          <button type="button" class="button button2" >PLAY</button>
    
-          <?php 
 
-         
-
-               ?>
 
         </div><!-- modal body ends here -->
 
 
         <div class="modal-footer">
-          <button type="button" class="entrbtn" data-dismiss="modal">CANCEL</button>  <!-- Unable to link to INGAME page -->
+          <button type="button" class="entrbtn" data-dismiss="modal">CANCEL</button> <!-- Unable to link to INGAME page -->
         </div> <!-- footer div -->
 
 
@@ -409,7 +357,6 @@ var host="<?php echo $host ?>";
 var rid= "<?php echo $roomID ?>";
 var refresh;
 var gid;
-var locationID = "<?php echo $randomLocation ?>";
 
 function refreshAjax(id){
   refresh = setInterval(ajaxGuestLoad,500);
@@ -434,9 +381,7 @@ function refreshAjax(id){
                             
                              var divelm=document.getElementById('tableSection');
                             
-                            if (response.includes("redirect") ) {
-                              window.location.replace("gameroom.php?guest="+gid+"&host="+host+"&room="+rid);
-                            }
+                            
                              divelm.innerHTML=response;
                         }
                 }

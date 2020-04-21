@@ -16,14 +16,22 @@ catch(PDOException $e){
 
 $username=$password="";
 $rowcount="";
+
 if( isset($_POST['email']) ){
 	$email=$_POST['email'];
+
 }
+
+
 if( isset($_POST['pass']) ){
 	$password=md5($_POST['pass']);
 }
 //include 'database_conn.php';
+/*-----------------------------------------------------------------------------------------------------------------------*/
 
+
+
+/*-------------------------------------------------------------------------------------------------------------*/
 
 
 try{
@@ -37,12 +45,24 @@ try{
 			 	$table= $object->fetchAll();
 					foreach ($table as $key) 
 					{
-						$_SESSION["email"]= $email;
+						if ($email === "admin@admin.com") {
+							# code...
+							header('Location: admin.php');
+								$_SESSION["email"]= $email;
+						$_SESSION["fname"]=$key[1];
+						$_SESSION["lname"]=$key[2];
+						$_SESSION["uid"]=$key[0];
+						}
+						else{
+							$_SESSION["email"]= $email;
 						$_SESSION["fname"]=$key[1];
 						$_SESSION["lname"]=$key[2];
 						$_SESSION["uid"]=$key[0];
 						/*send the user id as well*/
                     	header('Location: userprofile.php');
+
+						}
+						
                     	break;
                     }
 
