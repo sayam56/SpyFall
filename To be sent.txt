@@ -1,0 +1,7 @@
+admin.php
+admin.css
+res not db, for gif
+verifylocation
+home
+ajaxadmin
+verifyuser

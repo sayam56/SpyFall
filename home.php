@@ -51,17 +51,51 @@
       
     </div>
     <div class="modal-body">
-      <p>SpyFall is a party game that can be played with four or more players. At the start of each round, all the players receive a location –  </p>
-      <p> a casino, a travelling circus, a pirate ship or even a space station – except the spies that don’t know the place. <p>
-      <p>Then, players start asking each other yes or no questions – </p>
-      <p> “Do you like to go there?” </p>
-      <p> - trying to guess who among them is the spy.  </p>
 
-      <p> The spies don't know where they are, so they have to listen carefully to guess the location and remain undetectable. </p>
-      <p> If most players agree with the accusation, the accused player has to reveal his identity. </p>
-      <p> The round just ends when all the spies are uncovered or when one of them announces the correct secret location within the given time frame. </p>
 
-      <p><strong>Enjoy</strong></p>
+      <h5 style="color:red;">⇝ Game Objectives- <h5>
+
+
+        <p><b>⊷ The spy:</b> Will try to guess the round's location. Infer from others' questions and answers.</p>
+		<p><b>⊶ Other players:</b> Figure out who the spy is by asking questions.</p>
+
+<br>
+
+		<h5 style="color:red;">⇝ Round Timer- <h5>
+
+			<p> Each round will be of 10 minutes.</p> 
+			<img style="margin-left: 80px; padding: -5px;" src="res/timer.gif" alt="Timer">
+
+			<p> Game ends if either the clock runs out, SPY guesses the location CORRECTLY, OR the spy is identified by others. </p>
+
+<br>
+
+		<h5 style="color:red;">⇝ Game Flow- <h5>
+
+			<p><b>⊶ The location:</b> The round starts, each player is given a location. The location is the same for all players (e.g., Bank) except for one player, who is randomly given the <b>'SPY'</b> card. The spy does not know the round's location.</p>
+
+			<p><b>⊷ Questioning:</b> The game host (person who started the game) begins by questioning another player about the location. Example: "Is this a place where children are welcome?" </p>
+
+			<p><b>⊶ Answering:</b> The questioned player MUST answer. No follow up questions allowed. After they answer, it's then their turn to ask someone else a question. This continues until round is over.
+
+			<p><b>⊷ No retaliation questions:</b> If someone asked you a question for their turn, you cannot, then immediately ask them a question back for your turn. You MUST choose someone else. </p>
+<br>
+
+		<h5 style="color:red;">⇝ Guesses- <h5>
+
+			<p> At any time, a player can try to indict a suspected spy by putting that suspect up for vote. They must say "I'd like to put player <b>X</b> up for vote." Then go one by one clockwise around the circle, and each player much cast their vote if they're in agreement to indict.
+			If any player votes no, the round continues as it was. Each person can only put a suspect up for vote once per round. Use it wisely!
+		If a player is indicted <b>ONLY BY EVERYONE</b>, they must reveal whether or not they are the spy and the round ends.</p>
+
+		<p>At any time, the spy can reveal that they are the spy and make a guess at what the location is. The round <b>immediately</b> ends.</p>
+
+<hr style="height:2px;border-width:0;color:gray;background-color:pink">
+<h3 style="text-align:center"> ENJOY! <h3>
+	<hr style="height:2px;border-width:0;color:gray;background-color:pink">
+
+
+
+      
     </div>
     <div class="modal-footer">
 

@@ -4,6 +4,7 @@ $fname= $_SESSION["fname"];
 $lname =$_SESSION["lname"];
 $email = $_SESSION["email"];
 $uid = $_SESSION["uid"];
+$location_id = "";
 
  if(isset($_SESSION['fname'])) {
     echo "<script>console.log('inside if and it works');</script>"; 
@@ -41,7 +42,7 @@ $uid = $_SESSION["uid"];
   <title>WELCOME!</title>
   <!-- <link rel="stylesheet" href="bootstrap-4.3.1-dist/css/bootstrap.min.css"> -->
 
-  <link href="user.css" rel="stylesheet">
+  <link href="admin.css" rel="stylesheet">
   <link href="modal.css" rel="stylesheet">
   <link rel="icon" href="res/logo.ico">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -56,7 +57,7 @@ $uid = $_SESSION["uid"];
 
     <div class="outer">
 
-        <span id="left">
+        <span id="lefttxt">
             <h1> WELCOME!!  </h1>
         
             <h3> <?php echo "$fname "."$lname" ; ?> </h3>
@@ -68,63 +69,104 @@ $uid = $_SESSION["uid"];
         </span>
             
 
-        <span id="right">
+        <span id="rightbtn">
             <button onclick="location.href = 'logout.php';" class="button button2" >LOGOUT</button>
         </span>
 
 
     <div class="centre">
 
-        <!-- <button class="button button2" style="vertical-align:middle">Login</button> -->
-      <!--   <button onclick="document.getElementById('id01').style.display='block';" class="button button2" style="vertical-align:middle">Create Room</button> -->
+       <button onclick="showrTable();" class="button button2" style="vertical-align:middle">SEE ROOMS</button>
 
-     <!--    <input type="button" class="button button2" style="vertical-align: middle;" name="showEx" data-toggle="modal" data-target="#createRoomModal" value="Create Room"> -->
-
-       <!-- Trigger the modal with a button -->
+      
   
-      <button onclick="showTable();" class="button button2" style="vertical-align:middle">SEE LOCATIONS</button>
+      <button onclick="showlTable();" class="button button2" style="vertical-align:middle">SEE LOCATIONS</button>
 
      
 
-      <button type="button" class="button button2" data-toggle="modal" data-target="#createLocationModal" style="vertical-align: middle;" >CREATE LOCATION</button>
+      <button class="button button2" data-toggle="modal" data-target="#createLocationModal" style="vertical-align: middle;" >CREATE LOCATION</button>
 
+<!-- Location Table -->
 
-        
-            <div class="scrollTable">
+  <span id="left">
+
+      <div id="locationTableShow" class="table-responsive" style="display: inline;"> <!-- table div starts -->
+          <div style="color: white; text-align: center;">
+            <br>
+              <h2>EXISTING LOCATIONS<h2>
+
+        <!-- Location view and roles -->
+          <div class="scrollTable">
               <table class="table table-hover animate" style="width: 75%; margin: auto; ">
                     <thead class="thead-dark" style="color: white; text-align: center;">
 
                       <tr>
-                        <th>LIST OF LOCATIONS</th>
                         
+                        <th width="25%">LIST OF LOCATIONS</th>
+                        <th width="25%">ROLES</th>
+
+                    
+                        
+
                       </tr>
                       
                     </thead>
                 </table>
-                <div class="scrollTable">
+               
                 <table class="table animate" style="width: 75%; margin: auto; text-align: center;">
               
                   <tbody class="table" style="color: white;">
+
+
           <?php
 
           try{
 
-                    $lnameqry="SELECT l_name FROM `locations`";
-                    $lobj = $conn->query($lnameqry);
-                    $loctab = $lobj->fetchAll();
+                    // $lnameqry="SELECT l_name FROM `locations`";
+                    // $lobj = $conn->query($lnameqry);
+                    // $loctab = $lobj->fetchAll();
 
-                    foreach ($loctab as $k ) {                             
+                                $sql="SELECT * FROM locations"; // locations er naam rakhsi
+                              // $sql="SELECT * FROM locations"; // first column ta khali jacche
+
+                               // $sql="SELECT * FROM roles"; // roles dekhay
+                              
+
+
+                             $l_obj= $conn->query($sql);
+                             $l_table= $l_obj->fetchAll();
+
+                    foreach ($l_table as $k ) {  
+
+
+
                              ?> 
+
                              <tr style="/*border:2px solid white;*/ overflow: hidden;" id="tablerow">
+                     <!--  <tr style="border-bottom: 2px solid white; text-align:center; font-size: 20px; color: white;"> -->
                   
-                  <td><?php echo $k[0] ?></td>
+                   <td width="50%"><?php echo $k[1] ?></td>  <!-- locations gula dekhay -->
+
+                  <!-- roles table use korle location id and roles gula dekhay -->
+
+
+
+    <td width="50%">
+            <input type="button" name="select" value="SELECT" class="btn btn-outline-light btg-lg" data-toggle="modal" data-target="#viewRoleModal" onclick="showRoles(<?php echo $k[0]?>);"> 
+          </td>
+
+                 
+
+
+                   
                   
                 </tr>
+
                              <?php      
                             } 
                     }/* try block ends here*/
                     catch(PDOException $e){
-                                        echo "<script>console.log('guest room fetch error');</script>";
+                                        echo "<script>console.log('location fetch error');</script>";
                                     }/*catch ends here*/
 
 
@@ -137,19 +179,100 @@ $uid = $_SESSION["uid"];
               </table>
               </div><!-- scrollTable -->
 
+              </div> <!-- inner div -->
+
+        </div><!-- location table div ends -->
+      
+ </span> <!-- left span -->
+
+
+
+        <!-- Room table -->
+
+  <span id="right">
+
+<div id="roomTableShow" class="table-responsive" style="display: none;"> <!-- table div starts -->
+          <div style="color: white; text-align: center;">
+            <br>
+              <h2>AVAILABLE ROOMS<h2>
+              
+
+              <table class="table table-hover animate" style="width: 75%; margin: auto; ">
+                <thead class="thead-dark" style="color: white; text-align: center;">
+
+                  <tr>
+                    <th width="50%">ROOM NAME</th>
+                    <th width="50%">STATUS</th>
+                   
+                  </tr>
+                  
+                </thead>
+            </table>
+            <div class="scrollTable">
+            <table class="table table-hover animate" style="width: 75%; margin: auto; text-align: center;">
+              
+                <tbody class="table" style="color: white;">
+                  <?php
+
+                  $sql= "SELECT * FROM room";
+                  $obj = $conn->query($sql);
+
+                  if ($obj -> rowCount() == 0) {
+                    #table is empty as in to room available
+                    ?>
+                      <tr>
+                        <td colspan="3" style="text-align: center;">NOTHING TO SHOW</td>
+                      </tr>
+                    <?php
+                  }else
+                  {
+
+                    $table1 = $obj->fetchAll();
+
+                    foreach ($table1 as $val) {
+                      # so rooms availble here
+                      ?>
+                      
+                      <tr style="border-bottom: 2px solid white; text-align:center; font-size: 20px; color: white;">
+                        <td width="50%"><?php echo $val[2] ?></td>
+                        <td width="50%"><?php echo $val[4] ?></td>
+                        
+                      </tr>
+                      <?php
+                    }
+                  }
+
+                  ?>
+
+                </tbody>
+              
+
+              </table>
+
+              </div><!-- scrollTable -->
+          </div> <!-- inner div -->
+
+        </div><!-- room table div ends -->
+    
+</span>
+
+
+
+
+
+
+
  </div><!-- centre div ends -->
 
 
-
+ 
   </div><!-- outer div -->
 
 
 
-
-           <!--  Location Modal -->
-
-
-           <div class="modal fade" id="createLocationModal" role="dialog">
+<!--  Location Modal --> <!-- Click korle disabled hoy thakeh
+ -->
+<div class="modal fade" backdrop="static" id="createLocationModal" role="dialog">
     <div class="modal-dialog">
     
       <!-- Modal content-->
@@ -196,7 +319,7 @@ $uid = $_SESSION["uid"];
    </form>
 
 
-        </div>
+        </div> <!-- modal body ends -->
 
         <div class="modal-footer">
           <button type="button" class="btn btn-default animateClose" data-dismiss="modal">Close</button>
@@ -211,15 +334,90 @@ $uid = $_SESSION["uid"];
 
   </div> <!-- modal fade -->
 
+
+
+
+
+
+  <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+<!-- Role Modal -->
+ <!-- modal fade -->
+
+
+<div class="modal fade" id="viewRoleModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+
+        <div id="animation" >
+
+        <div class="modal-header">
+
+          <h4 class="modal-title">VIEW ROLES</h4>
+        </div>
+        <div class="modal-body">
+
+         <!--  Roles dekhabo using the location id -->
+         <div id="RolesTable">
+              
+              <div class="table-responsive">
+              <table class="col-12" width="100%">
+                <thead>
+                  <tr>
+                   
+                    <th>Existing roles</th>
+                  </tr>
+                </thead>
+
+                <tbody id="rolesection">
+                  <!-- loaded by ajax -->
+                </tbody>
+              </table>
+            </div><!-- exercise table ends -->
+
+            </div><!-- guest table ends here -->
+   
+
+        </div><!-- modal body div -->
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default animateClose" data-dismiss="modal">Close</button>
+        </div> <!-- footer div -->
+
+
+      </div><!-- animation -->
+
+      </div><!-- modal content ends here -->
+
+    </div> <!-- modal dialog -->
+
+  </div>
+ 
+
+
+
+           
 </div> <!-- container -->
 
-<<?php $_SESSION["fname"] = $fname; ?>
+<?php $_SESSION["fname"] = $fname; ?>
 
 
 <script>
 var uid= "<?php echo $uid ?>";
 
-function showTable(){
+function showlTable(){
+
+      if (document.getElementById('locationTableShow').style.display == 'none') {
+        document.getElementById('locationTableShow').style.display = 'inline';
+
+      }else{
+        document.getElementById('locationTableShow').style.display = 'none';
+      }
+    }/*showlTable ends */
+
+    function showrTable(){
 
       if (document.getElementById('roomTableShow').style.display == 'none') {
         document.getElementById('roomTableShow').style.display = 'inline';
@@ -227,21 +425,39 @@ function showTable(){
       }else{
         document.getElementById('roomTableShow').style.display = 'none';
       }
-    }/*showTable ends*/
+    }/*showrTable ends*/
 
 
-
-    // function showRoomG(id){
-    //     var roomId=id;
-
-    //     ekhane khali variable er value gula send hobe to the next page and oi page er moddhe ajax diye dynamically modal er moddhe new members add hbe
+      function showRoles(id) { /*here id containt the locaiton id of the clicked element*/
 
 
-    //     location.assign('waitingroom.php?roomID='+roomId+'&gst='+uid);
-    // }/*showRoomG*/
+        var ajaxreq=new XMLHttpRequest();
+                ajaxreq.open("GET","ajaxadmin.php?location="+id ); /*guest id from the onload page IF inside host, ar button click in general*/
+
+
+                ajaxreq.onreadystatechange=function ()
+                {
+                 if(ajaxreq.readyState==4 && ajaxreq.status==200)
+                        {
+                             var response=ajaxreq.responseText;
+                            
+                             var divelm=document.getElementById('rolesection');
+                            
+                            
+                             divelm.innerHTML=response;
+                        }
+                }
+                
+                ajaxreq.send();
+
+      
+
+
+      }
 
 </script>
 
 
 </body>
 </html>
+

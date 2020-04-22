@@ -18,11 +18,30 @@ catch(PDOException $e){
 
 
         //Data insertion from user
+
         
             $ltname = $_POST['ltname'];
             $l_id='';
 
 
+            $checkquery = "select * from locations where l_name='$ltname'";
+            $returnvalue=$conn->query($checkquery);
+            $rowcount=$returnvalue->rowCount();
+            if($rowcount==1)
+            {
+                ?>
+                    <script>
+                        
+                        window.alert("Location already exist, try a new one!");
+                        window.location.assign("admin.php");
+                    </script>
+                <?php
+            }
+            else
+            {
+
+                $ltname = $_POST['ltname'];
+                $l_id='';
            
 
              
@@ -41,6 +60,7 @@ catch(PDOException $e){
                     </script>
                     <?php
                 }
+            
 
 
 try{
@@ -67,7 +87,7 @@ try{
         
 
         for ($i=0; $i <6 ; $i++) { 
-            echo $vals[$i]." ".$rlname[$i];
+            // echo $vals[$i]." ".$rlname[$i];
             $sql= " INSERT INTO roles (l_id,roles_name,roles_number) VALUES ('$l_id','$rlname[$i]','$vals[$i]') ";
             $l_obj= $conn->query($sql);
             $index++;
@@ -76,8 +96,8 @@ try{
 
                 ?>
                   <script>
-                            window.alert("Signed up Successfully");
-                           /* window.location.assign("userprofile.php");*/
+                            window.alert("Added Successfully");
+                            window.location.assign("admin.php");
                   </script>
                 <?php
             }
@@ -89,7 +109,8 @@ try{
                 </script>
                 <?php
            }
-
+       
+}
          function UniqueRandomNumbersWithinRange($min, $max, $quantity) {
             $numbers = range($min, $max);
             shuffle($numbers);
