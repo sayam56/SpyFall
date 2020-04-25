@@ -1,3 +1,5 @@
+
+  
 @import url('https://fonts.googleapis.com/css?family=Exo:400,700&display=swap');
 
 
@@ -22,6 +24,7 @@ hr {
 }
 
 .outer{
+  padding-top: 10px;
   position: fixed;
   left: 0;
   top: 0;
@@ -30,6 +33,46 @@ hr {
   background: rgba(0,0,0,0.6);
   overflow: auto;
 }
+
+h1 {
+      color: red;
+      filter: drop-shadow(2px 2px 5px #990073);
+
+    }
+
+  h3{
+    color: white;
+    filter: drop-shadow(0px 0px 5px white);
+
+  }
+
+  h4{
+    color: white;
+    filter: drop-shadow(0px 0px 5px white);
+
+  }
+  #left{
+  
+  text-align: center;
+  width:39%;
+  display:inline-block;
+}
+#right{
+  margin-top: 3%;
+  width: 39%;
+  float: right;
+  padding-top: 0%;
+  margin: 1%;
+
+}
+
+#mid{
+  margin-top: 3%;
+  width: 20%;
+  display: inline-block;
+  text-align: center;
+}
+
 .button {
     
     border: none;
@@ -72,6 +115,42 @@ hr {
     width: 80%;
     padding: 20px;
     }
+
+
+    .scrollTable{
+
+  position: relative;
+  height: 350px;
+  overflow-y: auto;
+}
+    .scrollTable2{
+
+  position: relative;
+  height: auto;
+  overflow-y: visible;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.scrollTable::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE and Edge */
+.scrollTable {
+    -ms-overflow-style: none;
+}
+
+.table{
+  background-color: rgba(255,255,255,.1);
+  color: white;
+}
+
+.timer{
+  color: red;
+      filter: drop-shadow(2px 2px 5px #990073);
+}
+
+
 @keyframes animatebg{
   0%,100%{
     background-image: url('res/bg/bg (1).jpg');
@@ -80,17 +159,12 @@ hr {
     background-image: url('res/bg/bg (1).png');
   }
   50%{
-    background-image: url('res/bg/bg (2).png');
+    background-image: url('res/bg/bg (4).jpg');
   }
-/*  60%{
-    background-image: url('res/bg/bg (3).jpg');
-  }*/
   75%{
     background-image: url('res/bg/bg (4).jpg');
   }
 }
-
-
 
 @media (max-width: 992px) {
 

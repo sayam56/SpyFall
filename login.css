@@ -129,6 +129,7 @@ button:hover {
   display: table;
 }
 
+
 @keyframes animatebg{
   0%,100%{
     background-image: url('res/bg/bg (1).jpg');
@@ -137,16 +138,12 @@ button:hover {
     background-image: url('res/bg/bg (1).png');
   }
   50%{
-    background-image: url('res/bg/bg (2).png');
+    background-image: url('res/bg/bg (4).jpg');
   }
-/*  60%{
-    background-image: url('res/bg/bg (3).jpg');
-  }*/
   75%{
     background-image: url('res/bg/bg (4).jpg');
   }
 }
-
 
 
 @media screen and (max-width: 300px) {

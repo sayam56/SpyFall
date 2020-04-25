@@ -3,7 +3,6 @@ session_start();
 $fname= $_SESSION["fname"];
 $lname =$_SESSION["lname"];
 $email = $_SESSION["email"];
-$uid = $_SESSION["uid"];
 
  if(isset($_SESSION['fname'])) {
  	echo "<script>console.log('inside if and it works');</script>";	
@@ -25,6 +24,24 @@ $uid = $_SESSION["uid"];
             catch(PDOException $e){
                 echo "<script>window.alert('connection error');</script>";
             }
+
+
+		try{
+
+                    $id="select u_id from users where u_email='$email' ";
+                    $object = $conn->query($id);
+                    $table = $object->fetchAll();
+
+                    foreach ($table as $key ) {
+                    	$uid = $key[0];
+                        break;
+                                
+                            } 
+
+                    }/*outer try block ends here*/
+                    catch(PDOException $e){
+                                        echo "<script>console.log('uid fetch error');</script>";
+                                    }/*outer catch ends here*/
 
 ?>
 
@@ -61,7 +78,7 @@ $uid = $_SESSION["uid"];
         
   			<h3> <?php echo "$fname "."$lname" ; ?> </h3>
   			<h3>Your Email Is : <?php echo "$email" ; ?> </h3>
-  			<h3>Your UID is: <?php echo "$uid" ; ?> </h3>
+  			
 
 
     		
@@ -132,7 +149,10 @@ $uid = $_SESSION["uid"];
                         <td width="25%"><?php echo $val[2] ?></td>
                         <td width="25%"><?php echo $val[4] ?></td>
                         <td width="25%">
-                          <input type="button" name="select" value="SELECT" class="btn btn-outline-light btg-lg" onclick="showRoomG(<?php echo $val[0]?>);"> <!-- room id ta send kora hocche and since users clicks this only if the user is a guest so user id ta guest hishebe send hbe -->
+                           <!-- room id ta send kora hocche and since users clicks this only if the user is a guest so user id ta guest hishebe send hbe -->
+
+                           <button type="button" class="btn btn-outline-light btg-lg" data-toggle="modal" data-target="#passwordModal" style="vertical-align: middle;" onclick="showRoomG(<?php echo $val[0]?>);" >ENTER</button>
+
                         </td>
                       </tr>
                       <?php
@@ -217,13 +237,62 @@ $uid = $_SESSION["uid"];
 
   </div> <!-- modal fade -->
 
+
+
+<!-- password asking modal -->
+<div class="modal fade" id="passwordModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+
+        <div id="animation" >
+
+        <div class="modal-header">
+
+          <h4 class="modal-title">PLEASE ENTER PASSWORD</h4>
+        </div>
+        <div class="modal-body">
+          
+          <!-- form here -->
+          <input type="password" name="roomPass" id="roomPass">
+    
+           <input class="entrbtn" type="submit" name="roomSub" id="roomSub" onclick="passRoomG();">
+  
+     
+   </form>
+
+
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default animateClose" data-dismiss="modal">Close</button>
+        </div> <!-- footer div -->
+
+
+      </div><!-- animation -->
+
+      </div><!-- modal content ends here -->
+
+    </div> <!-- modal dialog -->
+
+  </div> <!-- modal fade -->
+
+
+
+
+
+
 </div> <!-- container -->
 
-<<?php $_SESSION["fname"] = $fname; ?>
+<?php $_SESSION["fname"] = $fname;
+
+$_SESSION["lname"] = $lname; ?>
 
 
 <script>
 var uid= "<?php echo $uid ?>";
+var roomId;
 
 function showTable(){
 
@@ -238,12 +307,31 @@ function showTable(){
 
 
     function showRoomG(id){
-    	var roomId=id;
+    	roomId=id;
+
+      ;
 
     	/*ekhane khali variable er value gula send hobe to the next page and oi page er moddhe ajax diye dynamically modal er moddhe new members add hbe*/
 
 
-		location.assign('waitingroom.php?roomID='+roomId+'&gst='+uid);
+		/*location.assign('waitingroom.php?roomID='+roomId+'&gst='+uid);*/
+    }/*showRoomG*/
+
+    function passRoomG(id){
+
+
+      console.log("inside pass room G");
+      console.log(roomId)
+
+      var res = document.getElementById('roomPass').value;
+
+      console.log(res);
+
+      location.assign('roompass.php?roomID='+roomId+'&gst='+uid+'&roomPass='+res);
+      /*ekhane khali variable er value gula send hobe to the next page and oi page er moddhe ajax diye dynamically modal er moddhe new members add hbe*/
+
+
+    /*location.assign('waitingroom.php?roomID='+roomId+'&gst='+uid);*/
     }/*showRoomG*/
 
 </script>

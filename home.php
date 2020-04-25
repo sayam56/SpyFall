@@ -38,7 +38,7 @@
 				
 			
 
-			<button id="myBtn" class="button button2" style="vertical-align:middle">How to play?</button>
+			<button id="myBtn" class="button button2" style="vertical-align:middle">HOW TO PLAY?</button>
 
 <!-- The Modal -->
 <div id="myModal" class="modal">
@@ -63,7 +63,7 @@
 
 		<h5 style="color:red;">⇝ Round Timer- <h5>
 
-			<p> Each round will be of 10 minutes.</p> 
+			<p> Each round will be of 10-15 minutes.</p> 
 			<img style="margin-left: 80px; padding: -5px;" src="res/timer.gif" alt="Timer">
 
 			<p> Game ends if either the clock runs out, SPY guesses the location CORRECTLY, OR the spy is identified by others. </p>
