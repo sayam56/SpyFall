@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 25, 2020 at 04:17 PM
+-- Generation Time: Apr 26, 2020 at 01:01 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -98,7 +98,8 @@ INSERT INTO `locations` (`l_id`, `l_name`) VALUES
 (11, 'Movie Theatre'),
 (12, 'Space Station'),
 (13, 'Police Station'),
-(14, 'Supermarket');
+(14, 'Supermarket'),
+(15, 'Circus');
 
 -- --------------------------------------------------------
 
@@ -200,7 +201,13 @@ INSERT INTO `roles` (`l_id`, `roles_name`, `roles_number`) VALUES
 (14, 'Security Guard', 6),
 (14, 'Customer', 4),
 (14, 'Stock Clerk', 1),
-(14, 'Manager', 5);
+(14, 'Manager', 5),
+(15, 'Spy', 3),
+(15, 'Clown', 1),
+(15, 'Ring Master', 2),
+(15, 'Magician', 5),
+(15, 'Visitor', 6),
+(15, 'Acrobat', 4);
 
 -- --------------------------------------------------------
 
@@ -213,7 +220,8 @@ CREATE TABLE `room` (
   `host_uid` int(100) NOT NULL,
   `r_name` varchar(100) NOT NULL,
   `r_pass` varchar(100) NOT NULL,
-  `r_status` varchar(100) NOT NULL
+  `r_status` varchar(100) NOT NULL,
+  `playerCount` int(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -244,7 +252,8 @@ INSERT INTO `users` (`u_id`, `u_fname`, `u_lname`, `u_email`, `u_pass`) VALUES
 (20, 'Neil', 'Barry', 'neilbarry@gmail.com', '5cc433b405f7da107e4f5533fe858203'),
 (21, 'fahmida', 'iqbal', 'fahmida.nijhum@gmail.com', 'b8b5a34bed956999c3443424bfd7369e'),
 (22, 'Ali', 'Rukun', 'rukun111@gmail.com', '1329d4c89c736e63ee29bad973dcf595'),
-(23, 'Afif', 'Ahnaf', 'hasnahenarenu@gmail.com', '091bdb04724e94dc0a55abed3e4899dd');
+(23, 'Afif', 'Ahnaf', 'hasnahenarenu@gmail.com', '091bdb04724e94dc0a55abed3e4899dd'),
+(24, 'Mr', 'Boo', 'boo@boo.com', '0b189d34246fdb5e49ff587dff6931f7');
 
 --
 -- Indexes for dumped tables
@@ -312,19 +321,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `locations`
 --
 ALTER TABLE `locations`
-  MODIFY `l_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `l_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `room`
 --
 ALTER TABLE `room`
-  MODIFY `r_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
+  MODIFY `r_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=151;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `u_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `u_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- Constraints for dumped tables

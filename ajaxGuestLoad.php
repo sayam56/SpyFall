@@ -1,4 +1,5 @@
 <?php
+session_start();
 $index= 0;
 $roleVal="";
 	 echo "<script>console.log('next page SUCCESSFULL!!!!');</script>";
@@ -27,7 +28,11 @@ $roleVal="";
 					$g_uid = $_GET['guest'];
 					$h_uid = $_GET['host'];
 					$r_id = $_GET['room'];
-			
+					$players = $_GET['pl'];
+
+					
+					/*$pcount = ($players-1);*/
+				echo "this is the player count: ".($players-1);
 
                     		
                     		/*just insert*/
@@ -53,11 +58,11 @@ $roleVal="";
  					$gobj = $conn->query($gsql);
  					$tab = $gobj->fetchAll();
  					$gcount = $gobj->rowCount();
- 					echo $gcount." joined out of 5";
+ 					echo $gcount." joined out of ".($players-1);
  					foreach ($tab as $val) { /*val has the guest UIDs for this room, we need to display*/ 
 
 
-						 if ($gcount >= 5) {	
+						 if ($gcount == ($players-1)  ) {	
 	
 						 	/*header("Location: redirect.php");*/
 

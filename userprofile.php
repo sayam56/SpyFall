@@ -214,6 +214,15 @@ $email = $_SESSION["email"];
 		                  $_SESSION["huid"] = $uid;
 		                  /*room create kore waitingroom e gele user host.*/
 		                ?>
+
+                    <label for="players"><b>Choose The Number Of Players (HOST INCLUSIVE)</b></label>
+                   <br>
+
+                    <input type="radio" name="players" value="4"> 4<br>
+                    <input type="radio" name="players" value="5"> 5<br>
+                    <input type="radio" name="players" value="6" checked> 6<br>
+                    <br>
+                  
 		                
 
 		       <button type="submit" class="entrbtn">Enter</button>

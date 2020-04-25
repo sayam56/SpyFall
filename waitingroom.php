@@ -18,6 +18,7 @@ $roomID = "";
 $guid = "";
 $roomName="";
 $randomLocation="";
+$roomPC="";
 
  if(isset($_SESSION['fname'])) {
   echo "<script>console.log('inside if and it works');</script>"; 
@@ -50,7 +51,9 @@ catch(PDOException $e){
             $rname = $_POST['rname'];
             $pass = md5($_POST['psw']);
             $status=$_POST['status'];
-         
+            $pc = $_POST['players'];
+        
+
             $checkquery = "select * from room where r_name='$rname'";
             
             $returnvalue=$conn->query($checkquery);
@@ -78,7 +81,7 @@ catch(PDOException $e){
                     $table = $object->fetchAll();
 
                     foreach ($table as $key ) {
-                                $insert = $conn->prepare("INSERT INTO room(`host_uid`, `r_name`, `r_pass`, `r_status`) VALUES ('".$key[0]."','".$rname."','".$pass."','".$status."')");
+                                $insert = $conn->prepare("INSERT INTO room(`host_uid`, `r_name`, `r_pass`, `r_status`, `playerCount`) VALUES ('".$key[0]."','".$rname."','".$pass."','".$status."','".$pc."')");
                                 break;
                                 
                             } 
@@ -156,6 +159,8 @@ catch(PDOException $e){
                               $status = $kk[4];
                               $host = $kk[1];
                               $roomName = $kk[2];
+                              $roomPC = $kk[5];
+                              echo "<script>console.log('guest room room pc is <?php echo$roomPC ?>');</script>";
                               break;         
                             } 
                     }/* try block ends here*/
@@ -194,6 +199,8 @@ catch(PDOException $e){
                               $status = $k[4];
                               $host = $k[1];
                               $roomName = $k[2];
+                              $roomPC = $k[5];
+                              echo "<script>console.log('guest room room pc is <?php echo$roomPC ?>');</script>";
                               break;         
                             } 
 
@@ -413,9 +420,14 @@ catch(PDOException $e){
   
 var host="<?php echo $host ?>";
 var rid= "<?php echo $roomID ?>";
+var roompc="<?php echo $roomPC ?>";
 var refresh;
 var gid;
 var locationID = "<?php echo $randomLocation ?>";
+
+console.log( roompc );
+
+
 
 function refreshAjax(id){
   var rr = getRandomInt(1,6);
@@ -429,7 +441,7 @@ function refreshAjax(id){
 
     
         var ajaxreq=new XMLHttpRequest();
-                ajaxreq.open("GET","ajaxGuestLoad.php?guest="+gid+"&host="+host+"&room="+rid ); /*guest id from the onload page IF inside host, ar button click in general*/
+                ajaxreq.open("GET","ajaxGuestLoad.php?guest="+gid+"&host="+host+"&room="+rid+"&pl="+roompc ); /*guest id from the onload page IF inside host, ar button click in general*/
 
 
                 ajaxreq.onreadystatechange=function ()
